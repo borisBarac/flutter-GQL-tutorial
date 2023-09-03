@@ -1,17 +1,19 @@
+fragment CharacterSubversions on Character {
+	name
+  species
+  location {
+  	name
+  }   
+}
 
-query GetCharacters($name: String!, $page: Int!){
+
+query GetVersionsOfCharacter($name: String!, $page: Int!){
   characters(page: $page, filter: { name: $name }) {
     info {
       count
     }
     results {
-      name
+    	...CharacterSubversions   
     }
-  }
-  location(id: 1) {
-    id
-  }
-  episodesByIds(ids: [1, 2]) {
-    id
   }
 }

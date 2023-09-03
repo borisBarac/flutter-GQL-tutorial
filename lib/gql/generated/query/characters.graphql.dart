@@ -1,24 +1,425 @@
+import 'dart:async';
+import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
+import 'package:graphql/client.dart' as graphql;
+import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
-class Variables$Query$GetCharacters {
-  factory Variables$Query$GetCharacters({
+class Fragment$CharacterSubversions {
+  Fragment$CharacterSubversions({
+    this.name,
+    this.species,
+    this.location,
+    this.$__typename = 'Character',
+  });
+
+  factory Fragment$CharacterSubversions.fromJson(Map<String, dynamic> json) {
+    final l$name = json['name'];
+    final l$species = json['species'];
+    final l$location = json['location'];
+    final l$$__typename = json['__typename'];
+    return Fragment$CharacterSubversions(
+      name: (l$name as String?),
+      species: (l$species as String?),
+      location: l$location == null
+          ? null
+          : Fragment$CharacterSubversions$location.fromJson(
+              (l$location as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? name;
+
+  final String? species;
+
+  final Fragment$CharacterSubversions$location? location;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$species = species;
+    _resultData['species'] = l$species;
+    final l$location = location;
+    _resultData['location'] = l$location?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$species = species;
+    final l$location = location;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$name,
+      l$species,
+      l$location,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$CharacterSubversions) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$species = species;
+    final lOther$species = other.species;
+    if (l$species != lOther$species) {
+      return false;
+    }
+    final l$location = location;
+    final lOther$location = other.location;
+    if (l$location != lOther$location) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$CharacterSubversions
+    on Fragment$CharacterSubversions {
+  CopyWith$Fragment$CharacterSubversions<Fragment$CharacterSubversions>
+      get copyWith => CopyWith$Fragment$CharacterSubversions(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$CharacterSubversions<TRes> {
+  factory CopyWith$Fragment$CharacterSubversions(
+    Fragment$CharacterSubversions instance,
+    TRes Function(Fragment$CharacterSubversions) then,
+  ) = _CopyWithImpl$Fragment$CharacterSubversions;
+
+  factory CopyWith$Fragment$CharacterSubversions.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$CharacterSubversions;
+
+  TRes call({
+    String? name,
+    String? species,
+    Fragment$CharacterSubversions$location? location,
+    String? $__typename,
+  });
+  CopyWith$Fragment$CharacterSubversions$location<TRes> get location;
+}
+
+class _CopyWithImpl$Fragment$CharacterSubversions<TRes>
+    implements CopyWith$Fragment$CharacterSubversions<TRes> {
+  _CopyWithImpl$Fragment$CharacterSubversions(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$CharacterSubversions _instance;
+
+  final TRes Function(Fragment$CharacterSubversions) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? species = _undefined,
+    Object? location = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$CharacterSubversions(
+        name: name == _undefined ? _instance.name : (name as String?),
+        species:
+            species == _undefined ? _instance.species : (species as String?),
+        location: location == _undefined
+            ? _instance.location
+            : (location as Fragment$CharacterSubversions$location?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Fragment$CharacterSubversions$location<TRes> get location {
+    final local$location = _instance.location;
+    return local$location == null
+        ? CopyWith$Fragment$CharacterSubversions$location.stub(_then(_instance))
+        : CopyWith$Fragment$CharacterSubversions$location(
+            local$location, (e) => call(location: e));
+  }
+}
+
+class _CopyWithStubImpl$Fragment$CharacterSubversions<TRes>
+    implements CopyWith$Fragment$CharacterSubversions<TRes> {
+  _CopyWithStubImpl$Fragment$CharacterSubversions(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? species,
+    Fragment$CharacterSubversions$location? location,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Fragment$CharacterSubversions$location<TRes> get location =>
+      CopyWith$Fragment$CharacterSubversions$location.stub(_res);
+}
+
+const fragmentDefinitionCharacterSubversions = FragmentDefinitionNode(
+  name: NameNode(value: 'CharacterSubversions'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'Character'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'name'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'species'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'location'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+          name: NameNode(value: 'name'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+        FieldNode(
+          name: NameNode(value: '__typename'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        ),
+      ]),
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentCharacterSubversions = DocumentNode(definitions: [
+  fragmentDefinitionCharacterSubversions,
+]);
+
+extension ClientExtension$Fragment$CharacterSubversions
+    on graphql.GraphQLClient {
+  void writeFragment$CharacterSubversions({
+    required Fragment$CharacterSubversions data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'CharacterSubversions',
+            document: documentNodeFragmentCharacterSubversions,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$CharacterSubversions? readFragment$CharacterSubversions({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'CharacterSubversions',
+          document: documentNodeFragmentCharacterSubversions,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Fragment$CharacterSubversions.fromJson(result);
+  }
+}
+
+class Fragment$CharacterSubversions$location {
+  Fragment$CharacterSubversions$location({
+    this.name,
+    this.$__typename = 'Location',
+  });
+
+  factory Fragment$CharacterSubversions$location.fromJson(
+      Map<String, dynamic> json) {
+    final l$name = json['name'];
+    final l$$__typename = json['__typename'];
+    return Fragment$CharacterSubversions$location(
+      name: (l$name as String?),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String? name;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$name,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$CharacterSubversions$location) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$CharacterSubversions$location
+    on Fragment$CharacterSubversions$location {
+  CopyWith$Fragment$CharacterSubversions$location<
+          Fragment$CharacterSubversions$location>
+      get copyWith => CopyWith$Fragment$CharacterSubversions$location(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$CharacterSubversions$location<TRes> {
+  factory CopyWith$Fragment$CharacterSubversions$location(
+    Fragment$CharacterSubversions$location instance,
+    TRes Function(Fragment$CharacterSubversions$location) then,
+  ) = _CopyWithImpl$Fragment$CharacterSubversions$location;
+
+  factory CopyWith$Fragment$CharacterSubversions$location.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$CharacterSubversions$location;
+
+  TRes call({
+    String? name,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$CharacterSubversions$location<TRes>
+    implements CopyWith$Fragment$CharacterSubversions$location<TRes> {
+  _CopyWithImpl$Fragment$CharacterSubversions$location(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$CharacterSubversions$location _instance;
+
+  final TRes Function(Fragment$CharacterSubversions$location) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$CharacterSubversions$location(
+        name: name == _undefined ? _instance.name : (name as String?),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$CharacterSubversions$location<TRes>
+    implements CopyWith$Fragment$CharacterSubversions$location<TRes> {
+  _CopyWithStubImpl$Fragment$CharacterSubversions$location(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+class Variables$Query$GetVersionsOfCharacter {
+  factory Variables$Query$GetVersionsOfCharacter({
     required String name,
     required int page,
   }) =>
-      Variables$Query$GetCharacters._({
+      Variables$Query$GetVersionsOfCharacter._({
         r'name': name,
         r'page': page,
       });
 
-  Variables$Query$GetCharacters._(this._$data);
+  Variables$Query$GetVersionsOfCharacter._(this._$data);
 
-  factory Variables$Query$GetCharacters.fromJson(Map<String, dynamic> data) {
+  factory Variables$Query$GetVersionsOfCharacter.fromJson(
+      Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$name = data['name'];
     result$data['name'] = (l$name as String);
     final l$page = data['page'];
     result$data['page'] = (l$page as int);
-    return Variables$Query$GetCharacters._(result$data);
+    return Variables$Query$GetVersionsOfCharacter._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -34,8 +435,9 @@ class Variables$Query$GetCharacters {
     return result$data;
   }
 
-  CopyWith$Variables$Query$GetCharacters<Variables$Query$GetCharacters>
-      get copyWith => CopyWith$Variables$Query$GetCharacters(
+  CopyWith$Variables$Query$GetVersionsOfCharacter<
+          Variables$Query$GetVersionsOfCharacter>
+      get copyWith => CopyWith$Variables$Query$GetVersionsOfCharacter(
             this,
             (i) => i,
           );
@@ -44,7 +446,7 @@ class Variables$Query$GetCharacters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Variables$Query$GetCharacters) ||
+    if (!(other is Variables$Query$GetVersionsOfCharacter) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -72,14 +474,14 @@ class Variables$Query$GetCharacters {
   }
 }
 
-abstract class CopyWith$Variables$Query$GetCharacters<TRes> {
-  factory CopyWith$Variables$Query$GetCharacters(
-    Variables$Query$GetCharacters instance,
-    TRes Function(Variables$Query$GetCharacters) then,
-  ) = _CopyWithImpl$Variables$Query$GetCharacters;
+abstract class CopyWith$Variables$Query$GetVersionsOfCharacter<TRes> {
+  factory CopyWith$Variables$Query$GetVersionsOfCharacter(
+    Variables$Query$GetVersionsOfCharacter instance,
+    TRes Function(Variables$Query$GetVersionsOfCharacter) then,
+  ) = _CopyWithImpl$Variables$Query$GetVersionsOfCharacter;
 
-  factory CopyWith$Variables$Query$GetCharacters.stub(TRes res) =
-      _CopyWithStubImpl$Variables$Query$GetCharacters;
+  factory CopyWith$Variables$Query$GetVersionsOfCharacter.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$GetVersionsOfCharacter;
 
   TRes call({
     String? name,
@@ -87,16 +489,16 @@ abstract class CopyWith$Variables$Query$GetCharacters<TRes> {
   });
 }
 
-class _CopyWithImpl$Variables$Query$GetCharacters<TRes>
-    implements CopyWith$Variables$Query$GetCharacters<TRes> {
-  _CopyWithImpl$Variables$Query$GetCharacters(
+class _CopyWithImpl$Variables$Query$GetVersionsOfCharacter<TRes>
+    implements CopyWith$Variables$Query$GetVersionsOfCharacter<TRes> {
+  _CopyWithImpl$Variables$Query$GetVersionsOfCharacter(
     this._instance,
     this._then,
   );
 
-  final Variables$Query$GetCharacters _instance;
+  final Variables$Query$GetVersionsOfCharacter _instance;
 
-  final TRes Function(Variables$Query$GetCharacters) _then;
+  final TRes Function(Variables$Query$GetVersionsOfCharacter) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -104,16 +506,16 @@ class _CopyWithImpl$Variables$Query$GetCharacters<TRes>
     Object? name = _undefined,
     Object? page = _undefined,
   }) =>
-      _then(Variables$Query$GetCharacters._({
+      _then(Variables$Query$GetVersionsOfCharacter._({
         ..._instance._$data,
         if (name != _undefined && name != null) 'name': (name as String),
         if (page != _undefined && page != null) 'page': (page as int),
       }));
 }
 
-class _CopyWithStubImpl$Variables$Query$GetCharacters<TRes>
-    implements CopyWith$Variables$Query$GetCharacters<TRes> {
-  _CopyWithStubImpl$Variables$Query$GetCharacters(this._res);
+class _CopyWithStubImpl$Variables$Query$GetVersionsOfCharacter<TRes>
+    implements CopyWith$Variables$Query$GetVersionsOfCharacter<TRes> {
+  _CopyWithStubImpl$Variables$Query$GetVersionsOfCharacter(this._res);
 
   TRes _res;
 
@@ -124,43 +526,25 @@ class _CopyWithStubImpl$Variables$Query$GetCharacters<TRes>
       _res;
 }
 
-class Query$GetCharacters {
-  Query$GetCharacters({
+class Query$GetVersionsOfCharacter {
+  Query$GetVersionsOfCharacter({
     this.characters,
-    this.location,
-    this.episodesByIds,
     this.$__typename = 'Query',
   });
 
-  factory Query$GetCharacters.fromJson(Map<String, dynamic> json) {
+  factory Query$GetVersionsOfCharacter.fromJson(Map<String, dynamic> json) {
     final l$characters = json['characters'];
-    final l$location = json['location'];
-    final l$episodesByIds = json['episodesByIds'];
     final l$$__typename = json['__typename'];
-    return Query$GetCharacters(
+    return Query$GetVersionsOfCharacter(
       characters: l$characters == null
           ? null
-          : Query$GetCharacters$characters.fromJson(
+          : Query$GetVersionsOfCharacter$characters.fromJson(
               (l$characters as Map<String, dynamic>)),
-      location: l$location == null
-          ? null
-          : Query$GetCharacters$location.fromJson(
-              (l$location as Map<String, dynamic>)),
-      episodesByIds: (l$episodesByIds as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : Query$GetCharacters$episodesByIds.fromJson(
-                  (e as Map<String, dynamic>)))
-          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$GetCharacters$characters? characters;
-
-  final Query$GetCharacters$location? location;
-
-  final List<Query$GetCharacters$episodesByIds?>? episodesByIds;
+  final Query$GetVersionsOfCharacter$characters? characters;
 
   final String $__typename;
 
@@ -168,11 +552,6 @@ class Query$GetCharacters {
     final _resultData = <String, dynamic>{};
     final l$characters = characters;
     _resultData['characters'] = l$characters?.toJson();
-    final l$location = location;
-    _resultData['location'] = l$location?.toJson();
-    final l$episodesByIds = episodesByIds;
-    _resultData['episodesByIds'] =
-        l$episodesByIds?.map((e) => e?.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -181,15 +560,9 @@ class Query$GetCharacters {
   @override
   int get hashCode {
     final l$characters = characters;
-    final l$location = location;
-    final l$episodesByIds = episodesByIds;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$characters,
-      l$location,
-      l$episodesByIds == null
-          ? null
-          : Object.hashAll(l$episodesByIds.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -199,33 +572,13 @@ class Query$GetCharacters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetCharacters) || runtimeType != other.runtimeType) {
+    if (!(other is Query$GetVersionsOfCharacter) ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$characters = characters;
     final lOther$characters = other.characters;
     if (l$characters != lOther$characters) {
-      return false;
-    }
-    final l$location = location;
-    final lOther$location = other.location;
-    if (l$location != lOther$location) {
-      return false;
-    }
-    final l$episodesByIds = episodesByIds;
-    final lOther$episodesByIds = other.episodesByIds;
-    if (l$episodesByIds != null && lOther$episodesByIds != null) {
-      if (l$episodesByIds.length != lOther$episodesByIds.length) {
-        return false;
-      }
-      for (int i = 0; i < l$episodesByIds.length; i++) {
-        final l$episodesByIds$entry = l$episodesByIds[i];
-        final lOther$episodesByIds$entry = lOther$episodesByIds[i];
-        if (l$episodesByIds$entry != lOther$episodesByIds$entry) {
-          return false;
-        }
-      }
-    } else if (l$episodesByIds != lOther$episodesByIds) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -237,127 +590,85 @@ class Query$GetCharacters {
   }
 }
 
-extension UtilityExtension$Query$GetCharacters on Query$GetCharacters {
-  CopyWith$Query$GetCharacters<Query$GetCharacters> get copyWith =>
-      CopyWith$Query$GetCharacters(
-        this,
-        (i) => i,
-      );
+extension UtilityExtension$Query$GetVersionsOfCharacter
+    on Query$GetVersionsOfCharacter {
+  CopyWith$Query$GetVersionsOfCharacter<Query$GetVersionsOfCharacter>
+      get copyWith => CopyWith$Query$GetVersionsOfCharacter(
+            this,
+            (i) => i,
+          );
 }
 
-abstract class CopyWith$Query$GetCharacters<TRes> {
-  factory CopyWith$Query$GetCharacters(
-    Query$GetCharacters instance,
-    TRes Function(Query$GetCharacters) then,
-  ) = _CopyWithImpl$Query$GetCharacters;
+abstract class CopyWith$Query$GetVersionsOfCharacter<TRes> {
+  factory CopyWith$Query$GetVersionsOfCharacter(
+    Query$GetVersionsOfCharacter instance,
+    TRes Function(Query$GetVersionsOfCharacter) then,
+  ) = _CopyWithImpl$Query$GetVersionsOfCharacter;
 
-  factory CopyWith$Query$GetCharacters.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetCharacters;
+  factory CopyWith$Query$GetVersionsOfCharacter.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetVersionsOfCharacter;
 
   TRes call({
-    Query$GetCharacters$characters? characters,
-    Query$GetCharacters$location? location,
-    List<Query$GetCharacters$episodesByIds?>? episodesByIds,
+    Query$GetVersionsOfCharacter$characters? characters,
     String? $__typename,
   });
-  CopyWith$Query$GetCharacters$characters<TRes> get characters;
-  CopyWith$Query$GetCharacters$location<TRes> get location;
-  TRes episodesByIds(
-      Iterable<Query$GetCharacters$episodesByIds?>? Function(
-              Iterable<
-                  CopyWith$Query$GetCharacters$episodesByIds<
-                      Query$GetCharacters$episodesByIds>?>?)
-          _fn);
+  CopyWith$Query$GetVersionsOfCharacter$characters<TRes> get characters;
 }
 
-class _CopyWithImpl$Query$GetCharacters<TRes>
-    implements CopyWith$Query$GetCharacters<TRes> {
-  _CopyWithImpl$Query$GetCharacters(
+class _CopyWithImpl$Query$GetVersionsOfCharacter<TRes>
+    implements CopyWith$Query$GetVersionsOfCharacter<TRes> {
+  _CopyWithImpl$Query$GetVersionsOfCharacter(
     this._instance,
     this._then,
   );
 
-  final Query$GetCharacters _instance;
+  final Query$GetVersionsOfCharacter _instance;
 
-  final TRes Function(Query$GetCharacters) _then;
+  final TRes Function(Query$GetVersionsOfCharacter) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? characters = _undefined,
-    Object? location = _undefined,
-    Object? episodesByIds = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$GetCharacters(
+      _then(Query$GetVersionsOfCharacter(
         characters: characters == _undefined
             ? _instance.characters
-            : (characters as Query$GetCharacters$characters?),
-        location: location == _undefined
-            ? _instance.location
-            : (location as Query$GetCharacters$location?),
-        episodesByIds: episodesByIds == _undefined
-            ? _instance.episodesByIds
-            : (episodesByIds as List<Query$GetCharacters$episodesByIds?>?),
+            : (characters as Query$GetVersionsOfCharacter$characters?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$GetCharacters$characters<TRes> get characters {
+  CopyWith$Query$GetVersionsOfCharacter$characters<TRes> get characters {
     final local$characters = _instance.characters;
     return local$characters == null
-        ? CopyWith$Query$GetCharacters$characters.stub(_then(_instance))
-        : CopyWith$Query$GetCharacters$characters(
+        ? CopyWith$Query$GetVersionsOfCharacter$characters.stub(
+            _then(_instance))
+        : CopyWith$Query$GetVersionsOfCharacter$characters(
             local$characters, (e) => call(characters: e));
   }
-
-  CopyWith$Query$GetCharacters$location<TRes> get location {
-    final local$location = _instance.location;
-    return local$location == null
-        ? CopyWith$Query$GetCharacters$location.stub(_then(_instance))
-        : CopyWith$Query$GetCharacters$location(
-            local$location, (e) => call(location: e));
-  }
-
-  TRes episodesByIds(
-          Iterable<Query$GetCharacters$episodesByIds?>? Function(
-                  Iterable<
-                      CopyWith$Query$GetCharacters$episodesByIds<
-                          Query$GetCharacters$episodesByIds>?>?)
-              _fn) =>
-      call(
-          episodesByIds: _fn(_instance.episodesByIds?.map((e) => e == null
-              ? null
-              : CopyWith$Query$GetCharacters$episodesByIds(
-                  e,
-                  (i) => i,
-                )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$GetCharacters<TRes>
-    implements CopyWith$Query$GetCharacters<TRes> {
-  _CopyWithStubImpl$Query$GetCharacters(this._res);
+class _CopyWithStubImpl$Query$GetVersionsOfCharacter<TRes>
+    implements CopyWith$Query$GetVersionsOfCharacter<TRes> {
+  _CopyWithStubImpl$Query$GetVersionsOfCharacter(this._res);
 
   TRes _res;
 
   call({
-    Query$GetCharacters$characters? characters,
-    Query$GetCharacters$location? location,
-    List<Query$GetCharacters$episodesByIds?>? episodesByIds,
+    Query$GetVersionsOfCharacter$characters? characters,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$GetCharacters$characters<TRes> get characters =>
-      CopyWith$Query$GetCharacters$characters.stub(_res);
-  CopyWith$Query$GetCharacters$location<TRes> get location =>
-      CopyWith$Query$GetCharacters$location.stub(_res);
-  episodesByIds(_fn) => _res;
+  CopyWith$Query$GetVersionsOfCharacter$characters<TRes> get characters =>
+      CopyWith$Query$GetVersionsOfCharacter$characters.stub(_res);
 }
 
-const documentNodeQueryGetCharacters = DocumentNode(definitions: [
+const documentNodeQueryGetVersionsOfCharacter = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'GetCharacters'),
+    name: NameNode(value: 'GetVersionsOfCharacter'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'name')),
@@ -428,12 +739,9 @@ const documentNodeQueryGetCharacters = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'CharacterSubversions'),
                 directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -454,63 +762,6 @@ const documentNodeQueryGetCharacters = DocumentNode(definitions: [
         ]),
       ),
       FieldNode(
-        name: NameNode(value: 'location'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: IntValueNode(value: '1'),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'episodesByIds'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'ids'),
-            value: ListValueNode(values: [
-              IntValueNode(value: '1'),
-              IntValueNode(value: '2'),
-            ]),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -519,37 +770,202 @@ const documentNodeQueryGetCharacters = DocumentNode(definitions: [
       ),
     ]),
   ),
+  fragmentDefinitionCharacterSubversions,
 ]);
+Query$GetVersionsOfCharacter _parserFn$Query$GetVersionsOfCharacter(
+        Map<String, dynamic> data) =>
+    Query$GetVersionsOfCharacter.fromJson(data);
+typedef OnQueryComplete$Query$GetVersionsOfCharacter = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Query$GetVersionsOfCharacter?,
+);
 
-class Query$GetCharacters$characters {
-  Query$GetCharacters$characters({
+class Options$Query$GetVersionsOfCharacter
+    extends graphql.QueryOptions<Query$GetVersionsOfCharacter> {
+  Options$Query$GetVersionsOfCharacter({
+    String? operationName,
+    required Variables$Query$GetVersionsOfCharacter variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetVersionsOfCharacter? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$GetVersionsOfCharacter? onComplete,
+    graphql.OnQueryError? onError,
+  })  : onCompleteWithParsed = onComplete,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          pollInterval: pollInterval,
+          context: context,
+          onComplete: onComplete == null
+              ? null
+              : (data) => onComplete(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Query$GetVersionsOfCharacter(data),
+                  ),
+          onError: onError,
+          document: documentNodeQueryGetVersionsOfCharacter,
+          parserFn: _parserFn$Query$GetVersionsOfCharacter,
+        );
+
+  final OnQueryComplete$Query$GetVersionsOfCharacter? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onComplete == null
+            ? super.properties
+            : super.properties.where((property) => property != onComplete),
+        onCompleteWithParsed,
+      ];
+}
+
+class WatchOptions$Query$GetVersionsOfCharacter
+    extends graphql.WatchQueryOptions<Query$GetVersionsOfCharacter> {
+  WatchOptions$Query$GetVersionsOfCharacter({
+    String? operationName,
+    required Variables$Query$GetVersionsOfCharacter variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$GetVersionsOfCharacter? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeQueryGetVersionsOfCharacter,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Query$GetVersionsOfCharacter,
+        );
+}
+
+class FetchMoreOptions$Query$GetVersionsOfCharacter
+    extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$GetVersionsOfCharacter({
+    required graphql.UpdateQuery updateQuery,
+    required Variables$Query$GetVersionsOfCharacter variables,
+  }) : super(
+          updateQuery: updateQuery,
+          variables: variables.toJson(),
+          document: documentNodeQueryGetVersionsOfCharacter,
+        );
+}
+
+extension ClientExtension$Query$GetVersionsOfCharacter
+    on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$GetVersionsOfCharacter>>
+      query$GetVersionsOfCharacter(
+              Options$Query$GetVersionsOfCharacter options) async =>
+          await this.query(options);
+  graphql.ObservableQuery<Query$GetVersionsOfCharacter>
+      watchQuery$GetVersionsOfCharacter(
+              WatchOptions$Query$GetVersionsOfCharacter options) =>
+          this.watchQuery(options);
+  void writeQuery$GetVersionsOfCharacter({
+    required Query$GetVersionsOfCharacter data,
+    required Variables$Query$GetVersionsOfCharacter variables,
+    bool broadcast = true,
+  }) =>
+      this.writeQuery(
+        graphql.Request(
+          operation: graphql.Operation(
+              document: documentNodeQueryGetVersionsOfCharacter),
+          variables: variables.toJson(),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Query$GetVersionsOfCharacter? readQuery$GetVersionsOfCharacter({
+    required Variables$Query$GetVersionsOfCharacter variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation: graphql.Operation(
+            document: documentNodeQueryGetVersionsOfCharacter),
+        variables: variables.toJson(),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null
+        ? null
+        : Query$GetVersionsOfCharacter.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$GetVersionsOfCharacter>
+    useQuery$GetVersionsOfCharacter(
+            Options$Query$GetVersionsOfCharacter options) =>
+        graphql_flutter.useQuery(options);
+graphql.ObservableQuery<Query$GetVersionsOfCharacter>
+    useWatchQuery$GetVersionsOfCharacter(
+            WatchOptions$Query$GetVersionsOfCharacter options) =>
+        graphql_flutter.useWatchQuery(options);
+
+class Query$GetVersionsOfCharacter$Widget
+    extends graphql_flutter.Query<Query$GetVersionsOfCharacter> {
+  Query$GetVersionsOfCharacter$Widget({
+    widgets.Key? key,
+    required Options$Query$GetVersionsOfCharacter options,
+    required graphql_flutter.QueryBuilder<Query$GetVersionsOfCharacter> builder,
+  }) : super(
+          key: key,
+          options: options,
+          builder: builder,
+        );
+}
+
+class Query$GetVersionsOfCharacter$characters {
+  Query$GetVersionsOfCharacter$characters({
     this.info,
     this.results,
     this.$__typename = 'Characters',
   });
 
-  factory Query$GetCharacters$characters.fromJson(Map<String, dynamic> json) {
+  factory Query$GetVersionsOfCharacter$characters.fromJson(
+      Map<String, dynamic> json) {
     final l$info = json['info'];
     final l$results = json['results'];
     final l$$__typename = json['__typename'];
-    return Query$GetCharacters$characters(
+    return Query$GetVersionsOfCharacter$characters(
       info: l$info == null
           ? null
-          : Query$GetCharacters$characters$info.fromJson(
+          : Query$GetVersionsOfCharacter$characters$info.fromJson(
               (l$info as Map<String, dynamic>)),
       results: (l$results as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$GetCharacters$characters$results.fromJson(
+              : Fragment$CharacterSubversions.fromJson(
                   (e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Query$GetCharacters$characters$info? info;
+  final Query$GetVersionsOfCharacter$characters$info? info;
 
-  final List<Query$GetCharacters$characters$results?>? results;
+  final List<Fragment$CharacterSubversions?>? results;
 
   final String $__typename;
 
@@ -581,7 +997,7 @@ class Query$GetCharacters$characters {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetCharacters$characters) ||
+    if (!(other is Query$GetVersionsOfCharacter$characters) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -615,48 +1031,49 @@ class Query$GetCharacters$characters {
   }
 }
 
-extension UtilityExtension$Query$GetCharacters$characters
-    on Query$GetCharacters$characters {
-  CopyWith$Query$GetCharacters$characters<Query$GetCharacters$characters>
-      get copyWith => CopyWith$Query$GetCharacters$characters(
+extension UtilityExtension$Query$GetVersionsOfCharacter$characters
+    on Query$GetVersionsOfCharacter$characters {
+  CopyWith$Query$GetVersionsOfCharacter$characters<
+          Query$GetVersionsOfCharacter$characters>
+      get copyWith => CopyWith$Query$GetVersionsOfCharacter$characters(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$GetCharacters$characters<TRes> {
-  factory CopyWith$Query$GetCharacters$characters(
-    Query$GetCharacters$characters instance,
-    TRes Function(Query$GetCharacters$characters) then,
-  ) = _CopyWithImpl$Query$GetCharacters$characters;
+abstract class CopyWith$Query$GetVersionsOfCharacter$characters<TRes> {
+  factory CopyWith$Query$GetVersionsOfCharacter$characters(
+    Query$GetVersionsOfCharacter$characters instance,
+    TRes Function(Query$GetVersionsOfCharacter$characters) then,
+  ) = _CopyWithImpl$Query$GetVersionsOfCharacter$characters;
 
-  factory CopyWith$Query$GetCharacters$characters.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetCharacters$characters;
+  factory CopyWith$Query$GetVersionsOfCharacter$characters.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetVersionsOfCharacter$characters;
 
   TRes call({
-    Query$GetCharacters$characters$info? info,
-    List<Query$GetCharacters$characters$results?>? results,
+    Query$GetVersionsOfCharacter$characters$info? info,
+    List<Fragment$CharacterSubversions?>? results,
     String? $__typename,
   });
-  CopyWith$Query$GetCharacters$characters$info<TRes> get info;
+  CopyWith$Query$GetVersionsOfCharacter$characters$info<TRes> get info;
   TRes results(
-      Iterable<Query$GetCharacters$characters$results?>? Function(
+      Iterable<Fragment$CharacterSubversions?>? Function(
               Iterable<
-                  CopyWith$Query$GetCharacters$characters$results<
-                      Query$GetCharacters$characters$results>?>?)
+                  CopyWith$Fragment$CharacterSubversions<
+                      Fragment$CharacterSubversions>?>?)
           _fn);
 }
 
-class _CopyWithImpl$Query$GetCharacters$characters<TRes>
-    implements CopyWith$Query$GetCharacters$characters<TRes> {
-  _CopyWithImpl$Query$GetCharacters$characters(
+class _CopyWithImpl$Query$GetVersionsOfCharacter$characters<TRes>
+    implements CopyWith$Query$GetVersionsOfCharacter$characters<TRes> {
+  _CopyWithImpl$Query$GetVersionsOfCharacter$characters(
     this._instance,
     this._then,
   );
 
-  final Query$GetCharacters$characters _instance;
+  final Query$GetVersionsOfCharacter$characters _instance;
 
-  final TRes Function(Query$GetCharacters$characters) _then;
+  final TRes Function(Query$GetVersionsOfCharacter$characters) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -665,68 +1082,69 @@ class _CopyWithImpl$Query$GetCharacters$characters<TRes>
     Object? results = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$GetCharacters$characters(
+      _then(Query$GetVersionsOfCharacter$characters(
         info: info == _undefined
             ? _instance.info
-            : (info as Query$GetCharacters$characters$info?),
+            : (info as Query$GetVersionsOfCharacter$characters$info?),
         results: results == _undefined
             ? _instance.results
-            : (results as List<Query$GetCharacters$characters$results?>?),
+            : (results as List<Fragment$CharacterSubversions?>?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
-  CopyWith$Query$GetCharacters$characters$info<TRes> get info {
+  CopyWith$Query$GetVersionsOfCharacter$characters$info<TRes> get info {
     final local$info = _instance.info;
     return local$info == null
-        ? CopyWith$Query$GetCharacters$characters$info.stub(_then(_instance))
-        : CopyWith$Query$GetCharacters$characters$info(
+        ? CopyWith$Query$GetVersionsOfCharacter$characters$info.stub(
+            _then(_instance))
+        : CopyWith$Query$GetVersionsOfCharacter$characters$info(
             local$info, (e) => call(info: e));
   }
 
   TRes results(
-          Iterable<Query$GetCharacters$characters$results?>? Function(
+          Iterable<Fragment$CharacterSubversions?>? Function(
                   Iterable<
-                      CopyWith$Query$GetCharacters$characters$results<
-                          Query$GetCharacters$characters$results>?>?)
+                      CopyWith$Fragment$CharacterSubversions<
+                          Fragment$CharacterSubversions>?>?)
               _fn) =>
       call(
           results: _fn(_instance.results?.map((e) => e == null
               ? null
-              : CopyWith$Query$GetCharacters$characters$results(
+              : CopyWith$Fragment$CharacterSubversions(
                   e,
                   (i) => i,
                 )))?.toList());
 }
 
-class _CopyWithStubImpl$Query$GetCharacters$characters<TRes>
-    implements CopyWith$Query$GetCharacters$characters<TRes> {
-  _CopyWithStubImpl$Query$GetCharacters$characters(this._res);
+class _CopyWithStubImpl$Query$GetVersionsOfCharacter$characters<TRes>
+    implements CopyWith$Query$GetVersionsOfCharacter$characters<TRes> {
+  _CopyWithStubImpl$Query$GetVersionsOfCharacter$characters(this._res);
 
   TRes _res;
 
   call({
-    Query$GetCharacters$characters$info? info,
-    List<Query$GetCharacters$characters$results?>? results,
+    Query$GetVersionsOfCharacter$characters$info? info,
+    List<Fragment$CharacterSubversions?>? results,
     String? $__typename,
   }) =>
       _res;
-  CopyWith$Query$GetCharacters$characters$info<TRes> get info =>
-      CopyWith$Query$GetCharacters$characters$info.stub(_res);
+  CopyWith$Query$GetVersionsOfCharacter$characters$info<TRes> get info =>
+      CopyWith$Query$GetVersionsOfCharacter$characters$info.stub(_res);
   results(_fn) => _res;
 }
 
-class Query$GetCharacters$characters$info {
-  Query$GetCharacters$characters$info({
+class Query$GetVersionsOfCharacter$characters$info {
+  Query$GetVersionsOfCharacter$characters$info({
     this.count,
     this.$__typename = 'Info',
   });
 
-  factory Query$GetCharacters$characters$info.fromJson(
+  factory Query$GetVersionsOfCharacter$characters$info.fromJson(
       Map<String, dynamic> json) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Query$GetCharacters$characters$info(
+    return Query$GetVersionsOfCharacter$characters$info(
       count: (l$count as int?),
       $__typename: (l$$__typename as String),
     );
@@ -760,7 +1178,7 @@ class Query$GetCharacters$characters$info {
     if (identical(this, other)) {
       return true;
     }
-    if (!(other is Query$GetCharacters$characters$info) ||
+    if (!(other is Query$GetVersionsOfCharacter$characters$info) ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -778,24 +1196,24 @@ class Query$GetCharacters$characters$info {
   }
 }
 
-extension UtilityExtension$Query$GetCharacters$characters$info
-    on Query$GetCharacters$characters$info {
-  CopyWith$Query$GetCharacters$characters$info<
-          Query$GetCharacters$characters$info>
-      get copyWith => CopyWith$Query$GetCharacters$characters$info(
+extension UtilityExtension$Query$GetVersionsOfCharacter$characters$info
+    on Query$GetVersionsOfCharacter$characters$info {
+  CopyWith$Query$GetVersionsOfCharacter$characters$info<
+          Query$GetVersionsOfCharacter$characters$info>
+      get copyWith => CopyWith$Query$GetVersionsOfCharacter$characters$info(
             this,
             (i) => i,
           );
 }
 
-abstract class CopyWith$Query$GetCharacters$characters$info<TRes> {
-  factory CopyWith$Query$GetCharacters$characters$info(
-    Query$GetCharacters$characters$info instance,
-    TRes Function(Query$GetCharacters$characters$info) then,
-  ) = _CopyWithImpl$Query$GetCharacters$characters$info;
+abstract class CopyWith$Query$GetVersionsOfCharacter$characters$info<TRes> {
+  factory CopyWith$Query$GetVersionsOfCharacter$characters$info(
+    Query$GetVersionsOfCharacter$characters$info instance,
+    TRes Function(Query$GetVersionsOfCharacter$characters$info) then,
+  ) = _CopyWithImpl$Query$GetVersionsOfCharacter$characters$info;
 
-  factory CopyWith$Query$GetCharacters$characters$info.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetCharacters$characters$info;
+  factory CopyWith$Query$GetVersionsOfCharacter$characters$info.stub(TRes res) =
+      _CopyWithStubImpl$Query$GetVersionsOfCharacter$characters$info;
 
   TRes call({
     int? count,
@@ -803,16 +1221,16 @@ abstract class CopyWith$Query$GetCharacters$characters$info<TRes> {
   });
 }
 
-class _CopyWithImpl$Query$GetCharacters$characters$info<TRes>
-    implements CopyWith$Query$GetCharacters$characters$info<TRes> {
-  _CopyWithImpl$Query$GetCharacters$characters$info(
+class _CopyWithImpl$Query$GetVersionsOfCharacter$characters$info<TRes>
+    implements CopyWith$Query$GetVersionsOfCharacter$characters$info<TRes> {
+  _CopyWithImpl$Query$GetVersionsOfCharacter$characters$info(
     this._instance,
     this._then,
   );
 
-  final Query$GetCharacters$characters$info _instance;
+  final Query$GetVersionsOfCharacter$characters$info _instance;
 
-  final TRes Function(Query$GetCharacters$characters$info) _then;
+  final TRes Function(Query$GetVersionsOfCharacter$characters$info) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -820,7 +1238,7 @@ class _CopyWithImpl$Query$GetCharacters$characters$info<TRes>
     Object? count = _undefined,
     Object? $__typename = _undefined,
   }) =>
-      _then(Query$GetCharacters$characters$info(
+      _then(Query$GetVersionsOfCharacter$characters$info(
         count: count == _undefined ? _instance.count : (count as int?),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
@@ -828,386 +1246,14 @@ class _CopyWithImpl$Query$GetCharacters$characters$info<TRes>
       ));
 }
 
-class _CopyWithStubImpl$Query$GetCharacters$characters$info<TRes>
-    implements CopyWith$Query$GetCharacters$characters$info<TRes> {
-  _CopyWithStubImpl$Query$GetCharacters$characters$info(this._res);
+class _CopyWithStubImpl$Query$GetVersionsOfCharacter$characters$info<TRes>
+    implements CopyWith$Query$GetVersionsOfCharacter$characters$info<TRes> {
+  _CopyWithStubImpl$Query$GetVersionsOfCharacter$characters$info(this._res);
 
   TRes _res;
 
   call({
     int? count,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetCharacters$characters$results {
-  Query$GetCharacters$characters$results({
-    this.name,
-    this.$__typename = 'Character',
-  });
-
-  factory Query$GetCharacters$characters$results.fromJson(
-      Map<String, dynamic> json) {
-    final l$name = json['name'];
-    final l$$__typename = json['__typename'];
-    return Query$GetCharacters$characters$results(
-      name: (l$name as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? name;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$name,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetCharacters$characters$results) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetCharacters$characters$results
-    on Query$GetCharacters$characters$results {
-  CopyWith$Query$GetCharacters$characters$results<
-          Query$GetCharacters$characters$results>
-      get copyWith => CopyWith$Query$GetCharacters$characters$results(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetCharacters$characters$results<TRes> {
-  factory CopyWith$Query$GetCharacters$characters$results(
-    Query$GetCharacters$characters$results instance,
-    TRes Function(Query$GetCharacters$characters$results) then,
-  ) = _CopyWithImpl$Query$GetCharacters$characters$results;
-
-  factory CopyWith$Query$GetCharacters$characters$results.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetCharacters$characters$results;
-
-  TRes call({
-    String? name,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetCharacters$characters$results<TRes>
-    implements CopyWith$Query$GetCharacters$characters$results<TRes> {
-  _CopyWithImpl$Query$GetCharacters$characters$results(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetCharacters$characters$results _instance;
-
-  final TRes Function(Query$GetCharacters$characters$results) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? name = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetCharacters$characters$results(
-        name: name == _undefined ? _instance.name : (name as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetCharacters$characters$results<TRes>
-    implements CopyWith$Query$GetCharacters$characters$results<TRes> {
-  _CopyWithStubImpl$Query$GetCharacters$characters$results(this._res);
-
-  TRes _res;
-
-  call({
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetCharacters$location {
-  Query$GetCharacters$location({
-    this.id,
-    this.$__typename = 'Location',
-  });
-
-  factory Query$GetCharacters$location.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$$__typename = json['__typename'];
-    return Query$GetCharacters$location(
-      id: (l$id as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? id;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetCharacters$location) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetCharacters$location
-    on Query$GetCharacters$location {
-  CopyWith$Query$GetCharacters$location<Query$GetCharacters$location>
-      get copyWith => CopyWith$Query$GetCharacters$location(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetCharacters$location<TRes> {
-  factory CopyWith$Query$GetCharacters$location(
-    Query$GetCharacters$location instance,
-    TRes Function(Query$GetCharacters$location) then,
-  ) = _CopyWithImpl$Query$GetCharacters$location;
-
-  factory CopyWith$Query$GetCharacters$location.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetCharacters$location;
-
-  TRes call({
-    String? id,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetCharacters$location<TRes>
-    implements CopyWith$Query$GetCharacters$location<TRes> {
-  _CopyWithImpl$Query$GetCharacters$location(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetCharacters$location _instance;
-
-  final TRes Function(Query$GetCharacters$location) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetCharacters$location(
-        id: id == _undefined ? _instance.id : (id as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetCharacters$location<TRes>
-    implements CopyWith$Query$GetCharacters$location<TRes> {
-  _CopyWithStubImpl$Query$GetCharacters$location(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? $__typename,
-  }) =>
-      _res;
-}
-
-class Query$GetCharacters$episodesByIds {
-  Query$GetCharacters$episodesByIds({
-    this.id,
-    this.$__typename = 'Episode',
-  });
-
-  factory Query$GetCharacters$episodesByIds.fromJson(
-      Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$$__typename = json['__typename'];
-    return Query$GetCharacters$episodesByIds(
-      id: (l$id as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String? id;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$GetCharacters$episodesByIds) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$GetCharacters$episodesByIds
-    on Query$GetCharacters$episodesByIds {
-  CopyWith$Query$GetCharacters$episodesByIds<Query$GetCharacters$episodesByIds>
-      get copyWith => CopyWith$Query$GetCharacters$episodesByIds(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$GetCharacters$episodesByIds<TRes> {
-  factory CopyWith$Query$GetCharacters$episodesByIds(
-    Query$GetCharacters$episodesByIds instance,
-    TRes Function(Query$GetCharacters$episodesByIds) then,
-  ) = _CopyWithImpl$Query$GetCharacters$episodesByIds;
-
-  factory CopyWith$Query$GetCharacters$episodesByIds.stub(TRes res) =
-      _CopyWithStubImpl$Query$GetCharacters$episodesByIds;
-
-  TRes call({
-    String? id,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$GetCharacters$episodesByIds<TRes>
-    implements CopyWith$Query$GetCharacters$episodesByIds<TRes> {
-  _CopyWithImpl$Query$GetCharacters$episodesByIds(
-    this._instance,
-    this._then,
-  );
-
-  final Query$GetCharacters$episodesByIds _instance;
-
-  final TRes Function(Query$GetCharacters$episodesByIds) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$GetCharacters$episodesByIds(
-        id: id == _undefined ? _instance.id : (id as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$GetCharacters$episodesByIds<TRes>
-    implements CopyWith$Query$GetCharacters$episodesByIds<TRes> {
-  _CopyWithStubImpl$Query$GetCharacters$episodesByIds(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
     String? $__typename,
   }) =>
       _res;
