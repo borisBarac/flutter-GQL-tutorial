@@ -1,0 +1,17 @@
+
+query GetCharacters($name: String!, $page: Int!){
+  characters(page: $page, filter: { name: $name }) {
+    info {
+      count
+    }
+    results {
+      name
+    }
+  }
+  location(id: 1) {
+    id
+  }
+  episodesByIds(ids: [1, 2]) {
+    id
+  }
+}
