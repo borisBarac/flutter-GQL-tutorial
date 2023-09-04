@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_gql/characters_repository.dart';
 import 'package:flutter_gql/gql/gql_client.dart';
 
@@ -17,12 +18,20 @@ class CharacterListProvider {
             CharactersRepositoryImpl(createLiveClient());
 
   Future<List<CharacterCellItem>> getInitialLoadItems() async {
-    return _charactersRepository
-        .getCharacters(mainCharacter, page: 0)
-        .then((value) {
-      return value
-          .map((e) => CharacterCellItem(e.name ?? '', e.species ?? 'Unknown'))
-          .toList();
-    });
+    try {
+      return _charactersRepository
+          .getCharacters(mainCharacter, page: 0)
+          .then((value) {
+        return value
+            .map((e) => CharacterCellItem(e.name ?? '', e.species ?? 'Unknown'))
+            .toList();
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+      debugPrintStack();
+      debugPrint(
+          '------------------------------------------------------------------------------------');
+      return [];
+    }
   }
 }
