@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_gql/characters_repository.dart';
+import 'package:flutter_gql/providers/characters_repository.dart';
 import 'package:flutter_gql/gql/generated/query/characters.graphql.dart';
 import 'package:mocktail/mocktail.dart';
 

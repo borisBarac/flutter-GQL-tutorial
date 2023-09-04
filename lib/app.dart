@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gql/character_list_privider.dart';
+import 'package:flutter_gql/providers/character_list_privider.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,42 +13,53 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ListPage(title: 'Flutter Demo Home Page'),
+      home: ListPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class ListPage extends HookWidget {
-  const ListPage({super.key, required this.title});
+  ListPage({CharacterListProvider? provider, required this.title, super.key})
+      : _provider = provider ?? CharacterListProvider();
   final String title;
+  final CharacterListProvider _provider;
+
+  Future<List<CharacterCellItem>> _getItems() async {
+    debugPrint('loading');
+    final items = await _provider.getInitialLoadItems();
+    debugPrint('items: $items');
+    return items;
+  }
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<List<CharacterCellItem>> modelList = useState([]);
+    final future = useMemoized(_getItems, []);
+    final snapShot = useFuture(future);
+    final unwrappedData = snapShot.data ?? [];
 
-    Future<List<CharacterCellItem>> getItems() async {
-      return CharacterListProvider().getInitialLoadItems();
-    }
-
-    useEffect(() {
-      var result = getItems();
-      return () {
-        result;
-      };
-    }, []);
-
-    return MaterialApp(
-      home: Scaffold(
-        body: ListView(
-          shrinkWrap: true,
-          children: modelList.value.map((e) {
-            return ListTile(
-              title: Text(e.tile),
-              subtitle: Text(e.species),
-            );
-          }).toList(),
-        ),
-      ),
+    final listView = ListView(
+      shrinkWrap: true,
+      children: unwrappedData.map((e) {
+        return ListTile(
+          title: Text(e.tile),
+          subtitle: Text(e.species),
+        );
+      }).toList(),
     );
+
+    const errorView = Center(
+      child: Text('Something went wrong!'),
+    );
+
+    const loadingView = Center(
+      child: Text('Loading...'),
+    );
+
+    return Scaffold(
+        body: snapShot.error != null
+            ? errorView
+            : snapShot.hasData
+                ? listView
+                : loadingView);
   }
 }

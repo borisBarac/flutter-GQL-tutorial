@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gql/characters_repository.dart';
+import 'package:flutter_gql/providers/characters_repository.dart';
 import 'package:flutter_gql/gql/gql_client.dart';
 
 class CharacterCellItem {

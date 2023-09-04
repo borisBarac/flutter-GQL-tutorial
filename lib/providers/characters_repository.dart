@@ -1,5 +1,5 @@
 import 'package:graphql/client.dart';
-import './gql/generated/query/characters.graphql.dart';
+import '../gql/generated/query/characters.graphql.dart';
 
 abstract class CharactersRepository {
   Future<List<Fragment$CharacterSubversions>> getCharacters(String name,
@@ -23,6 +23,6 @@ class CharactersRepositoryImpl implements CharactersRepository {
     final optionalArray = result.parsedData?.characters?.results ?? [];
     optionalArray.removeWhere((element) => element == null);
 
-    return optionalArray as List<Fragment$CharacterSubversions>;
+    return optionalArray.map((e) => e!).toList();
   }
 }

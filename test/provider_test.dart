@@ -1,4 +1,4 @@
-import 'package:flutter_gql/character_list_privider.dart';
+import 'package:flutter_gql/providers/character_list_privider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
