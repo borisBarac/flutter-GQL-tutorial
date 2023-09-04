@@ -25,9 +25,7 @@ class ListPage extends HookWidget {
   final CharacterListProvider _provider;
 
   Future<List<CharacterCellItem>> _getItems() async {
-    debugPrint('loading');
     final items = await _provider.getInitialLoadItems();
-    debugPrint('items: $items');
     return items;
   }
 
